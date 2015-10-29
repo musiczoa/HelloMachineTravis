@@ -128,3 +128,53 @@ proguard/
 # Android Studio Navigation editor temp files
 .navigation/
 
+
+
+### C template
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+
+
+
+### C++ template
+# Compiled Object files
+*.slo
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+
+
+
