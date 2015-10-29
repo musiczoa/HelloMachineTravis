@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 apply plugin: 'com.android.application'
 
 android {
@@ -30,3 +32,72 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
 }
+
+task swig(type: Exec) {
+    def packageName = 'me.insertcoin.hellomachine.swig'
+    def interfaceFileName = 'HelloMachine.i';
+    def outDir = new File("${projectDir}/src/main/java/" + packageName.replace('.', '/'))
+    outDir.deleteDir()
+    outDir.mkdirs()
+    Properties properties = new Properties();
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def swig = new File(properties.getProperty('swig.path'))
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        workingDir '/src/main/jni'
+        commandLine 'cmd', '/c', swig.absolutePath, '-c++', '-java', '-package', packageName, '-outdir', outDir.absolutePath, interfaceFileName
+    }
+    else {
+        commandLine swig.absolutePath, '-c++', '-java', '-package', packageName, '-outdir', outDir.absolutePath, "${projectDir}/src/main/jni/" + interfaceFileName
+    }
+}
+def getNDKBuildPath() {
+    Properties properties = new Properties();
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def command = properties.getProperty('ndk.dir')
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        command += "\\ndk-build.cmd"
+    }
+    else {
+        command += "/ndk-build"
+    }
+    return command
+}
+def getNDKBuildTask(String projectDir, boolean clean=false, Task dependency=null) {
+    if (clean) {
+        def taskName = "ndk-build -C ${projectDir} clean"
+        def task = tasks.findByName(taskName)
+        if (task != null) {
+            return task
+        }
+        return tasks.create(taskName, Exec) {
+            if (dependency != null) {
+                dependsOn dependency
+            }
+            commandLine getNDKBuildPath(), '-C', projectDir, 'clean'
+        }
+    }
+    def taskName = "ndk-build -C ${projectDir}"
+    def task = tasks.findByName(taskName)
+    if (task != null) {
+        return task
+    }
+    return tasks.create(taskName, Exec) {
+        if (dependency != null) {
+            dependsOn dependency
+        }
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def isDebug = properties.getProperty('ndk.debug').toBoolean()
+        def command = getNDKBuildPath()
+        if (isDebug) {
+            commandLine command, 'NDK_DEBUG=1', 'NDK_LOG=1', '-C', projectDir
+        }
+        else {
+            commandLine command, '-C', projectDir
+        }
+    }
+}
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn getNDKBuildTask(file('src/main').absolutePath, false, tasks.findByName('swig'))
+}
+clean.dependsOn getNDKBuildTask(file('src/main').absolutePath, true)
