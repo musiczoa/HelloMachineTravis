@@ -179,3 +179,10 @@ proguard/
 
 
 
+### Swig
+app/src/main/jni/*_wrap.cxx
+app/src/main/jni/*_wrap.h
+app/src/main/java/insertcoin/me/hellomachine/swig
+
+
+
