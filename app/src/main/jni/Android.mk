@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := HelloMachine
 LOCAL_NATIVE_SRC_DIR := ./
 LOCAL_SRC_FILES += \
-    $(LOCAL_NATIVE_SRC_DIR)Greeter.h
+    $(LOCAL_NATIVE_SRC_DIR)Greeter.cpp
 LOCAL_CPP_EXTENSION += .cxx .cpp .cc
 
 LOCAL_C_INCLUDES += $(NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.8/include
