@@ -5,9 +5,13 @@ jdk:
   - openjdk7
 
 before_install:
- - chmod +x gradlew
+  - chmod +x gradlew
 
-script: ./gradlew test
+install:
+  - TERM=dumb ./gradlew assemble
+
+script:
+  - TERM=dumb ./gradlew check
 
 branches:
   only:
