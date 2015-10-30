@@ -1,7 +1,14 @@
 language: java
+
 jdk:
   - oraclejdk7
+  - openjdk7
+
+before_install:
+ - chmod +x gradlew
+
 script: ./gradlew test
+
 branches:
   only:
     - develop
