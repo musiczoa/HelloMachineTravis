@@ -1,8 +1,8 @@
 language: java
 
 jdk:
-  - oraclejdk7
   - openjdk7
+  - oraclejdk7
 
 before_install:
   - chmod +x gradlew
@@ -17,3 +17,9 @@ branches:
   only:
     - develop
     - master
+
+install: /bin/true
+
+addons:
+  apt_packages:
+    - swig
