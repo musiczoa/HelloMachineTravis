@@ -11,7 +11,7 @@ install:
   - TERM=dumb ./gradlew assemble
 
 script:
-  - TERM=dumb ./gradlew check
+  - TERM=dumb ./gradlew build # check
 
 branches:
   only:
