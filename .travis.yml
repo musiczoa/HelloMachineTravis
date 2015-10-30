@@ -18,7 +18,6 @@ android:
 
 before_install:
   - chmod +x gradlew
-  - cp -R /usr/local/android-sdk-23.0.2 ./android-sdk
 
 install:
   - TERM=dumb ./gradlew assemble
