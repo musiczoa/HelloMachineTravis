@@ -56,8 +56,8 @@ before_install:
   # Install required components.
   # For a full list, run `android list sdk -a --extended`
   - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter build-tools-16.0.0 --no-ui --force > /dev/null
-  - echo yes | android update sdk --filter android-16 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter build-tools-23.0.0 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
   - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
 
@@ -68,15 +68,15 @@ before_install:
 # Let's try to build...
 #install: ./gradlew clean build
 
-script: ./gradlew clean build
-
-branches:
-  only:
-    - develop
-    - master
+script: ./gradlew build
 
 install: /bin/true
 
 addons:
   apt_packages:
     - swig
+
+branches:
+  only:
+    - develop
+    - master
