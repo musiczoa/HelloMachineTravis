@@ -20,10 +20,10 @@ before_install:
   - chmod +x gradlew
 
 install:
-  - TERM=dumb ./gradlew assemble
+  - TERM=dumb gradlew assemble
 
 script:
-  - TERM=dumb ./gradlew build # check
+  - TERM=dumb gradlew build # check
 
 branches:
   only:
