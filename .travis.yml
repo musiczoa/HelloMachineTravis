@@ -29,6 +29,7 @@ before_install:
   # - export GRADLE_HOME=$PWD/gradle-1.11
   # - export PATH=$GRADLE_HOME/bin:$PATH
 
+  - chmod +x gradlew
   # just to test gradle version, against our provided one
   - ./gradlew -v
 
