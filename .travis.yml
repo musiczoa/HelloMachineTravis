@@ -6,6 +6,7 @@ jdk:
 
 env:
   global:
+    - ANDROID_HOME="C:\\Users\\hwa\\AppData\\Local\\Android\\sdk"
     - ANDROID_SDK_VERSION="r16"
 
 android:
