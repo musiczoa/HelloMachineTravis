@@ -24,6 +24,7 @@ before_install:
   - wget https://dl.google.com/android/ndk/android-ndk-r9d-linux-x86_64.tar.bz2
   - tar xf android-ndk-r9d-linux-x86_64.tar.bz2
   - export ANDROID_NDK=`pwd`/android-ndk-r9d
+  - chmod +x gradlew
 
 script:
   # Use Buck to run the tests first because its output is more
