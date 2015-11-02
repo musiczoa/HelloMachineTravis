@@ -1,35 +1,59 @@
 language: java
-jdk:
-  - oraclejdk7
+
+jdk: oraclejdk7
+
+env:
+  global:
+    - ANDROID_SDK_VERSION="r23"
 
 before_install:
-  # Make sure apt is up to date.
+
+  - pwd # Print current working directory
+
+  # environment info
+  - gradle -v
+  - uname -a
+
+  # required libs for android build tools
+  # Update a system for ia32 libraries
   - sudo apt-get update -qq
-  # Travis is on 64bit and there will be a cryptic aapt error w/o these libs.
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
-  # For native code tests, we need some additional libraries if we are in a 64-bit environment.
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes gcc-multilib > /dev/null; fi
-  # Download the Android sdk and unzip.
-  - wget http://dl.google.com/android/android-sdk_r16-linux.tgz
-  - tar -zxf android-sdk_r16-linux.tgz
-  # Set up the sdk environment.
+  - if [ `uname -m` = x86_64 ]; then sudo apt-get update; fi
+  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
+
+  # for gradle output style
+  - export TERM=dumb
+
+  # newer version of gradle
+  # - wget http://services.gradle.org/distributions/gradle-1.12-bin.zip
+  # - unzip -qq gradle-1.12-bin.zip
+  # - export GRADLE_HOME=$PWD/gradle-1.11
+  # - export PATH=$GRADLE_HOME/bin:$PATH
+
+  # just to test gradle version, against our provided one
+  - ./gradlew -v
+
+  # newest android SDK
+  - wget http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
+  - tar -zxf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
   - export ANDROID_HOME=`pwd`/android-sdk-linux
-  - export PATH=${PATH}:${ANDROID_HOME}/tools
-  - export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-  - export PATH=${PATH}:${ANDROID_HOME}/build-tools
-  # Install the sdk bits we need.
-  #- ./scripts/travisci_install_android_sdk.sh > /dev/null
+  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
-  # Download the Android NDK and setup the environment.
-  - wget https://dl.google.com/android/ndk/android-ndk-r9d-linux-x86_64.tar.bz2
-  - tar xf android-ndk-r9d-linux-x86_64.tar.bz2
-  - export ANDROID_NDK=`pwd`/android-ndk-r9d
-  - chmod +x gradlew
+  # manually set sdk.dir variable, according to local paths
+  - echo "sdk.dir=$ANDROID_HOME" > local.properties
 
-script:
-  # Use Buck to run the tests first because its output is more
-  # conducive to diagnosing failed tests than Ant's is.
-  # We build with `--verbose 0` to hide the SuperConsole,
-  # which does not play well for Travis.
-  # Travis doesn't understand curses, so it sends us over the 10000 line limit.
-  - ./bin/buck build buck --verbose 0 && ./bin/buck test --all && ant travis
+  # Install required components.
+  # For a full list, run `android list sdk -a --extended`
+  - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
+  - echo yes | android update sdk --all --filter build-tools-21.0.0 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter android-21 --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+
+  # Otherwise
+  #- echo yes | android update sdk -t tools,platform-tools,extra-android-support,extra-android-m2repository,android-21 --force --no-ui
+
+
+# Let's try to build...
+#install: ./gradlew clean build
+
+script: ./gradlew clean build
