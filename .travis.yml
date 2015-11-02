@@ -20,7 +20,6 @@ android:
     - addon-google_apis-google-16
 
 before_install:
-  - cp -R /usr/local/android-sdk-16.0.2 ./android-sdk
   - chmod +x gradlew
 
 install:
