@@ -11,6 +11,9 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 
+notifications:
+  email: musiczoa@naver.com
+
 addons:
   apt_packages:
     - swig
@@ -25,4 +28,4 @@ before_install:
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
-script: ./gradlew clean debug
+script: ./gradlew debug
