@@ -1,20 +1,13 @@
 language: android
 android:
   components:
-    - build-tools-19.0.3
-
-notifications:
-  email: false
+    – android-22
+    – build-tools-22.0.1
+    – extra-android-support
+    – extra-android-m2repository
 
 before_install:
-  - chmod +x gradlew
-  #- git update-index --chmod=(+|-)x <file>
-  # for gradle output style
-  - export TERM=dumb
+  – chmod +x gradlew
 
-  # environment info
-  - ./gradlew -v
-  - uname -a
-
-# Let's try to build...
-script: ./gradlew clean build
+script:
+  – ./gradlew clean assemble
