@@ -39,8 +39,9 @@ task swig(type: Exec) {
     def outDir = new File("${projectDir}/src/main/java/" + packageName.replace('.', '/'))
     outDir.deleteDir()
     outDir.mkdirs()
-    Properties properties = new Properties();
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    //Properties properties = new Properties();
+    //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    Properties properties = getLocalProperty();
     def swig = new File(properties.getProperty('swig.path'))
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         workingDir '/src/main/jni'
@@ -50,9 +51,11 @@ task swig(type: Exec) {
         commandLine swig.absolutePath, '-c++', '-java', '-package', packageName, '-outdir', outDir.absolutePath, "${projectDir}/src/main/jni/" + interfaceFileName
     }
 }
+
 def getNDKBuildPath() {
-    Properties properties = new Properties();
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    //Properties properties = new Properties();
+    //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    Properties properties = getLocalProperty();
     def command = properties.getProperty('ndk.dir')
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         command += "\\ndk-build.cmd"
@@ -85,8 +88,9 @@ def getNDKBuildTask(String projectDir, boolean clean=false, Task dependency=null
         if (dependency != null) {
             dependsOn dependency
         }
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        //Properties properties = new Properties()
+        //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        Properties properties = getLocalProperty();
         def isDebug = properties.getProperty('ndk.debug').toBoolean()
         def command = getNDKBuildPath()
         if (isDebug) {
@@ -97,6 +101,19 @@ def getNDKBuildTask(String projectDir, boolean clean=false, Task dependency=null
         }
     }
 }
+
+def getLocalProperty() {
+    Properties properties = new Properties()
+    //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    String propertyName = "local.properties"
+    if (System.getenv("TRAVIS").equals("true")) {
+        propertyName = "travisci.properties"
+    }
+    properties.load(project.rootProject.file(propertyName).newDataInputStream())
+
+    return properties;
+}
+
 tasks.withType(JavaCompile) {
     compileTask -> compileTask.dependsOn getNDKBuildTask(file('src/main').absolutePath, false, tasks.findByName('swig'))
 }

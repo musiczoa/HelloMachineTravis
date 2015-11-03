@@ -1,13 +1,29 @@
-language: android
+language : android
+sudo: false
+jdk: oraclejdk7
+
+
 android:
-  components:
-    – android-22
-    – build-tools-22.0.1
-    – extra-android-support
-    – extra-android-m2repository
+ components:
+    - build-tools-23.1.0
+
+    # The SDK version used to compile the project
+    - android-23
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-23
 
 before_install:
-  – chmod +x gradlew
+  - chmod +x gradlew
+  - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
+  - export ANDROID_NDK_HOME=$HOME/android-ndk-root
+  - echo "sdk.dir=$ANDROID_HOME\n" > travisci.properties
+  - echo "ndk.dir=$ANDROID_NDK_HOME\n" >> travisci.properties
+  - echo "swig.path=SWIG_PATH\n" >> travisci.properties
+  - echo "ndk.debug=true\n" >> travisci.properties
 
-script:
-  – ./gradlew clean assemble
+install:
+  - true
+
+script: ./gradlew assembleDebug
