@@ -14,14 +14,18 @@ android:
     - extra-android-m2repository
     - addon-google_apis-google-23
 
+addons:
+  apt_packages:
+    - swig
+
 before_install:
   - chmod +x gradlew
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
-  - echo "sdk.dir=$ANDROID_HOME\n" > travisci.properties
-  - echo "ndk.dir=$ANDROID_NDK_HOME\n" >> travisci.properties
-  - echo "swig.path=SWIG_PATH\n" >> travisci.properties
-  - echo "ndk.debug=true\n" >> travisci.properties
+  - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
+  - echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
+  - echo "swig.path=swig" >> travisci.properties
+  - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
 install:
