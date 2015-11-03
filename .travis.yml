@@ -28,4 +28,4 @@ before_install:
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
-script: ./gradlew debug
+script: ./gradlew build
