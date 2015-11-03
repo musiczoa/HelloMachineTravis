@@ -5,7 +5,7 @@ jdk: oraclejdk7
 
 android:
  components:
-    - build-tools-23.1.0
+    - build-tools-23.0.1
 
     # The SDK version used to compile the project
     - android-23
@@ -22,6 +22,7 @@ before_install:
   - echo "ndk.dir=$ANDROID_NDK_HOME\n" >> travisci.properties
   - echo "swig.path=SWIG_PATH\n" >> travisci.properties
   - echo "ndk.debug=true\n" >> travisci.properties
+  - cat travisci.properties
 
 install:
   - true
