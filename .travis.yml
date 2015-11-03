@@ -24,7 +24,7 @@ before_install:
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
   - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
   - echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
-  - echo "swig.path=swig" >> travisci.properties
+  - echo "swig.path=`which swig`" >> travisci.properties
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
