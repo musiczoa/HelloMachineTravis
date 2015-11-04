@@ -30,8 +30,8 @@ before_install:
 
 script:
   - ./gradlew build
-  - ./gradlew connectedCheck lint
-  - ./gradlew connectedInstrumentTest
+  #- ./gradlew connectedCheck lint
+  #- ./gradlew connectedInstrumentTest
 
 after_success:
  - ./gradlew uploadArchives
