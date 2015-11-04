@@ -28,6 +28,12 @@ before_install:
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
-script: ./gradlew build
+script:
+  - ./gradlew build
+  - ./gradlew connectedCheck lint
+  - ./gradlew connectedInstrumentTest
+
+after_success:
+ - ./gradlew uploadArchives
 
 # assembleDebug, build -> Success. debug -> Fail
