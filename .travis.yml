@@ -19,7 +19,7 @@ addons:
     - swig
 
 before_install:
-  - chmod +x gradlew
+  #- chmod +x gradlew
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
   - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
@@ -29,3 +29,5 @@ before_install:
   - cat travisci.properties
 
 script: ./gradlew build
+
+# assembleDebug, build -> Success. debug -> Fail
