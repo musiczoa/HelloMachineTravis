@@ -5,7 +5,6 @@ jdk: oraclejdk7
 android:
  components:
     - build-tools-23.0.1
-
     # The SDK version used to compile the project
     - android-23
     - extra-google-m2repository
@@ -35,5 +34,15 @@ script:
 
 after_success:
  - ./gradlew uploadArchives
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api-key: ${GH_TOKEN}
+  file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
+  on:
+    tags: true
+    all_branches: true
+    repo: musiczoa/HelloMachineTest
 
 # assembleDebug, build -> Success. debug -> Fail
