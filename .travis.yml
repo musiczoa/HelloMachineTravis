@@ -12,7 +12,7 @@ android:
     - extra-android-m2repository
 
 notifications:
-  email: musiczoa@naver.com
+  email: hwa.hyeon@insertcoin.me
 
 addons:
   apt_packages:
