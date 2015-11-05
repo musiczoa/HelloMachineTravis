@@ -43,16 +43,18 @@ script:
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
 
-after_success:
- - ./gradlew uploadArchives
+#after_success:
+ #- ./gradlew uploadArchives
 
 before_deploy:
   - git config --global user.email "hwa.hyeon@insertcoin.me"
   - git config --global user.name "musiczoa"
   - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  - git push -q https://github.com/musiczoa/HelloMachineTest --tags
-  - ls -R
+  - git tag
+  - $GIT_TAG
+  #- git push -q https://github.com/musiczoa/HelloMachineTest --tags
+  #- ls -R
 
 deploy:
   provider: releases
