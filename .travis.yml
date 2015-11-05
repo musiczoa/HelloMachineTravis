@@ -38,8 +38,9 @@ after_success:
 deploy:
   provider: releases
   skip_cleanup: true
-  api-key: ${GH_TOKEN}
+  api-key: 9729dc4acb0612be67b730f327b10c1303a7222d # ${GH_TOKEN} # GITHUB OAUTH TOKEN
   file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
+  - ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   on:
     tags: true
     all_branches: true
