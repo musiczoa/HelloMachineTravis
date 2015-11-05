@@ -58,7 +58,7 @@ before_deploy:
 deploy:
   provider: releases
   skip_cleanup: true
-  api-key: ${GH_TOKEN} # GITHUB OAUTH TOKEN
+  api-key: 9729dc4acb0612be67b730f327b10c1303a7222d #${GH_TOKEN} # GITHUB OAUTH TOKEN
   #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
   file: app/build/outputs/apk/app-release.apk
   #file: "/app/build/outputs/apk/app-release.apk"
