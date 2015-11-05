@@ -38,6 +38,7 @@ script:
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
+  - $GH_TOKEN
 
 #after_success:
   #- ./gradlew uploadArchives
