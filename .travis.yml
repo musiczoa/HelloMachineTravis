@@ -58,14 +58,14 @@ before_deploy:
 deploy:
   provider: releases
   skip_cleanup: true
-  api-key: 9729dc4acb0612be67b730f327b10c1303a7222d #${GH_TOKEN} # GITHUB OAUTH TOKEN
+  api-key: "4e2bddb32504646b0e233adfc80f8e03fc61aff8" #${GH_TOKEN} # GITHUB OAUTH TOKEN
   #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
-  file: app/build/outputs/apk/app-release.apk
-  #file: "/app/build/outputs/apk/app-release.apk"
+  #file: app/build/outputs/apk/app-release.apk
+  file: "/app/build/outputs/apk/app-release.apk"
   #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   on:
-    #tags: true
-    tags: false
+    tags: true
+    #tags: false
     all_branches: true
     repo: musiczoa/HelloMachineTest
 
