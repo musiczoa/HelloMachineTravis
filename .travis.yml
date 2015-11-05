@@ -29,7 +29,8 @@ branches:
 
 before_install:
   - gem install travis -v 1.7.5 --no-rdoc --no-ri
-  - travis setup releases
+  #- travis setup releases
+  - gem install travis
 
   - chmod +x gradlew # 이거 안하면 ./gradlew build -> permission denied 에러
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
