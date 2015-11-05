@@ -22,9 +22,9 @@ addons:
   apt_packages:
     - swig
 
-branches:
-  only:
-    - develop
+#branches:
+  #only:
+    #- develop
 
 before_install:
   #- gem install travis -v 1.7.5 --no-rdoc --no-ri
@@ -72,9 +72,9 @@ deploy:
   file: "/app/build/outputs/apk/app-release.apk"
   #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   on:
-    #tags: true
-    tags: false
-    #all_branches: true
+    tags: true
+    #tags: false
+    all_branches: true
     repo: musiczoa/HelloMachineTest
 
 # assembleDebug, build -> Success. debug -> Fail
