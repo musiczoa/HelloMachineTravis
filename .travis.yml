@@ -39,7 +39,7 @@ before_install:
 script:
   #- ./gradlew build assembleRelease
   - gradle clean build
-  - gradle dist
+  #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
 
@@ -59,8 +59,7 @@ deploy:
   skip_cleanup: true
   api-key: ${GH_TOKEN} # GITHUB OAUTH TOKEN
   #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
-  file: "dist/app-release.apk"
-  #file: app/build/outputs/apk/app-release.apk
+  file: app/build/outputs/apk/app-release.apk
   #file: "/app/build/outputs/apk/app-release.apk"
   #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   on:
