@@ -32,7 +32,7 @@ before_install:
   - cat travisci.properties
 
 script:
-  - ./gradlew build
+  - ./gradlew build assembleRelease
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
 
@@ -40,14 +40,16 @@ after_success:
  - ./gradlew uploadArchives
 
 deploy:
-  provider: releases
-  skip_cleanup: true
-  api-key: ${GH_TOKEN} # GITHUB OAUTH TOKEN
-  file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
-  - ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
-  on:
-    tags: true
-    all_branches: true
-    repo: musiczoa/HelloMachineTest
+  - provider: releases
+    skip_cleanup: true
+    api-key: ${GH_TOKEN} # GITHUB OAUTH TOKEN
+    #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
+    file: app/build/outputs/apk/app-release.apk
+    #file: "/app/build/outputs/apk/app-release.apk"
+    #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
+    on:
+      tags: true
+      all_branches: true
+      repo: musiczoa/HelloMachineTest
 
 # assembleDebug, build -> Success. debug -> Fail
