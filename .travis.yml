@@ -4,10 +4,6 @@ language : android
 sudo: false # true로 하면 ndk git clone에서 실패함
 jdk: oraclejdk7
 
-env:
-  global:
-    - GH_TOKEN = 9729dc4acb0612be67b730f327b10c1303a7222d
-
 android:
  components:
     - build-tools-23.0.1
@@ -37,14 +33,14 @@ before_install:
   - cat travisci.properties
 
 script:
-  #- ./gradlew build assembleRelease
-  - gradle clean build
+  - ./gradlew build assembleRelease
+  #- gradle clean build
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
 
-#after_success:
- #- ./gradlew uploadArchives
+after_success:
+  - ./gradlew uploadArchives
 
 before_deploy:
   - git config --global user.email "hwa.hyeon@insertcoin.me"
