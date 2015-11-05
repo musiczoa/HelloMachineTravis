@@ -22,7 +22,15 @@ addons:
   apt_packages:
     - swig
 
+branches:
+  only:
+    - develop
+    - master
+
 before_install:
+  - gem install travis -v 1.7.5 --no-rdoc --no-ri
+  - travis setup releases
+
   - chmod +x gradlew # 이거 안하면 ./gradlew build -> permission denied 에러
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
@@ -38,7 +46,7 @@ script:
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
-  - $GH_TOKEN
+  - echo $GH_TOKEN
 
 #after_success:
   #- ./gradlew uploadArchives
@@ -48,14 +56,17 @@ before_deploy:
   - git config --global user.name "musiczoa"
   - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - echo $GIT_TAG
   - git tag
-  - git push -q https://musiczoa@github.com/musiczoa/HelloMachineTest --tags
+  #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTest --tags
+  - git push origin develop --tags
   #- ls -R
 
 deploy:
   provider: releases
+  user: musiczoa
   skip_cleanup: true
-  api-key: "4e2bddb32504646b0e233adfc80f8e03fc61aff8" #${GH_TOKEN} # GITHUB OAUTH TOKEN
+  api-key: 4e2bddb32504646b0e233adfc80f8e03fc61aff8 #${GH_TOKEN} # GITHUB OAUTH TOKEN
   #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
   #file: app/build/outputs/apk/app-release.apk
   file: "/app/build/outputs/apk/app-release.apk"
