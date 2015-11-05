@@ -2,6 +2,10 @@ language : android
 sudo: false # true로 하면 ndk git clone에서 실패함
 jdk: oraclejdk7
 
+env:
+  global:
+    - GH_TOKEN = 9729dc4acb0612be67b730f327b10c1303a7222d
+
 android:
  components:
     - build-tools-23.0.1
@@ -38,7 +42,7 @@ after_success:
 deploy:
   provider: releases
   skip_cleanup: true
-  api-key: 9729dc4acb0612be67b730f327b10c1303a7222d # ${GH_TOKEN} # GITHUB OAUTH TOKEN
+  api-key: ${GH_TOKEN} # GITHUB OAUTH TOKEN
   file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
   - ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   on:
