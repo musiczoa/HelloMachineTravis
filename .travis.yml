@@ -41,12 +41,12 @@ before_install:
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
-script:
+#script:
   #- ./gradlew build assembleRelease
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
-  - gradle clean build
+  #- gradle clean build
   #- echo $GH_TOKEN
 
 #after_success:
