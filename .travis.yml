@@ -66,11 +66,13 @@ deploy:
   file_glob: true
   # Which file(s) to upload
   #file: "${RELEASE_PKG_FILE}"
-  file: "/app/build/outputs/apk/app-release.apk"
+  file: app/build/outputs/apk/app-release.apk
   #file: "app-release.apk"
   # do not delete the files we're trying to upload
   skip_cleanup: true
   on:
-    tags: true
     #all_branches: true
     repo: musiczoa/HelloMachineTravis
+    tags: true
+
+# https://github.com/larsgrefer/bpm-meter-android/blob/master/.travis.yml
