@@ -42,11 +42,11 @@ before_install:
   - cat travisci.properties
 
 script:
-  - ./gradlew build assembleRelease
-  #- gradle clean build
+  #- ./gradlew build assembleRelease
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
+  - gradle clean build
   #- echo $GH_TOKEN
 
 #after_success:
