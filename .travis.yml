@@ -42,7 +42,8 @@ before_install:
   - cat travisci.properties
 
 script:
-  - ./gradlew build assembleRelease
+  #- ./gradlew build assembleRelease
+  - ./gradlew clean assemble test uploadArchives
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
@@ -53,12 +54,14 @@ script:
   #- ./gradlew uploadArchives
 
 before_deploy:
-  #- git add . && git commit -m "tag commit test"
-  #- export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  #- echo ${GIT_TAG}
-  #- git tag ${GIT_TAG}
-  #- git push origin --tags
-  #- git push origin master
+  - git config --global user.email "hwa.hyeon@insertcoin.me"
+  - git config --global user.name "musiczoa"
+  - git add . && git commit -m "tag commit test"
+  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  - echo ${GIT_TAG}
+  - git tag ${GIT_TAG}
+  - git push origin --tags
+  - git push origin master
 
   #- git config --global user.email "hwa.hyeon@insertcoin.me"
   #- git config --global user.name "musiczoa"
