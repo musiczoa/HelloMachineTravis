@@ -18,9 +18,9 @@ android {
     signingConfigs {
         releaseSigning {
             storeFile file("C://Users/hwa/git/HelloMachine/app/release.jks")
-            storePassword "a123456789"
-            keyAlias "myreleasekey"
-            keyPassword "a123456789"
+            storePassword "123456"
+            keyAlias "mykey"
+            keyPassword "123456"
         }
     }
 
