@@ -53,6 +53,13 @@ script:
   #- ./gradlew uploadArchives
 
 before_deploy:
+  - git add . && git commit -m "tag commit test"
+  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  - echo ${GIT_TAG}
+  - git tag ${GIT_TAG}
+  - git push origin --tags
+  - git push origin master
+
   #- git config --global user.email "hwa.hyeon@insertcoin.me"
   #- git config --global user.name "musiczoa"
   #- export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
@@ -61,16 +68,16 @@ before_deploy:
   #- git tag
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
   #- git push origin develop --tags
-  - export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
-  - echo "Deploying ${RELEASE_APK_FILE} to GitHub"
+  #- export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
+  #- echo "Deploying ${RELEASE_APK_FILE} to GitHub"
 
 deploy:
   provider: releases
   api-key: 8275f8882f6249dd577cd511aad31cd931adefee #${GH_TOKEN}
   #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTravis.${TRAVIS_TAG}.apk
   #file: app/build/outputs/apk/app-release.apk
-  #file: "/app/build/outputs/apk/app-release.apk"
-  file: "${RELEASE_APK_FILE}"
+  file: "/app/build/outputs/apk/app-release.apk"
+  #file: "${RELEASE_APK_FILE}"
   #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
   skip_cleanup: true
   on:
