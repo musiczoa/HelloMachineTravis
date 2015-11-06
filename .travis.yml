@@ -15,20 +15,26 @@ notifications:
 
 addons:
   apt_packages:
-    - swig
+  - swig
 
 before_install:
-  - chmod +x gradlew
-  - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
-  - export ANDROID_NDK_HOME=$HOME/android-ndk-root
-  - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
-  - echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
-  - echo "swig.path=`which swig`" >> travisci.properties
-  - echo "ndk.debug=true" >> travisci.properties
-  - cat travisci.properties
+- chmod +x gradlew
+- git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
+- export ANDROID_NDK_HOME=$HOME/android-ndk-root
+- echo "sdk.dir=$ANDROID_HOME" > travisci.properties
+- echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
+- echo "swig.path=`which swig`" >> travisci.properties
+- echo "ndk.debug=true" >> travisci.properties
+- cat travisci.properties
+
+before_script:
+- git config --global user.email "hwa.hyeon@insertcoin.me"
+- git config --global user.name "musiczoa"
+- git tag 1.0.5
+- git push origin --tags
 
 script:
-  - ./gradlew clean build
+- "./gradlew clean build"
 
 deploy:
   provider: releases
@@ -39,4 +45,4 @@ deploy:
   on:
     tags: true
     all_branches: true
-    repo: musiczoa/helloMachineTravis
+    repo: musiczoa/HelloMachineTravis
