@@ -24,6 +24,8 @@ addons:
 
 before_install:
   - pwd
+  - ls
+  - echo $HOME
   - echo $TRAVIS_BUILD_DIR
 
   - chmod +x gradlew
