@@ -30,6 +30,7 @@ before_install:
 before_script:
 - git config --global user.email "hwa.hyeon@insertcoin.me"
 - git config --global user.name ${GIT_USERNAME}
+- echo ${GIT_USERNAME}
 - git config --global user.password ${GIT_PASSWORD}
 - git tag 1.0.5
 - git push origin --tags
