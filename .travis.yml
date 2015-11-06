@@ -32,17 +32,17 @@ before_install:
 - echo "ndk.debug=true" >> travisci.properties
 - cat travisci.properties
 
-before_script:
-- git config --global user.email "hwa.hyeon@insertcoin.me"
-- git config --global user.name "musiczoa"
-- git config --global user.password ${GIT_PASSWORD}
-
-- git add . && commit -m "tagged commit test"
-- git tag 1.0.5
-- git push origin --tags
-
 script:
   - ./gradlew clean build
+
+before_deploy:
+  - git config --global user.email "hwa.hyeon@insertcoin.me"
+  - git config --global user.name "musiczoa"
+  - git config --global user.password ${GIT_PASSWORD}
+
+  - git add . && commit -m "tagged commit test"
+  - git tag 1.0.5
+  - git push origin --tags
 
 deploy:
   provider: releases
