@@ -42,8 +42,8 @@ before_install:
   - cat travisci.properties
 
 script:
-  #- ./gradlew build assembleRelease
-  - gradle clean build
+  - ./gradlew build assembleRelease
+  #- gradle clean build
   #- gradle dist
   #- ./gradlew connectedCheck lint
   #- ./gradlew connectedInstrumentTest
@@ -77,7 +77,7 @@ deploy:
   on:
     tags: true
     #tags: false
-    all_branches: true
+    branches: de
     repo: musiczoa/HelloMachineTest
 
 # assembleDebug, build -> Success. debug -> Fail
