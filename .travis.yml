@@ -69,7 +69,7 @@ script:
   #- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   #- echo $GIT_TAG
   #- git tag
-  #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
+  #- git push -q https://musiczoa@github.com/musiczoa/helloMachineTravis --tags
   #- git push origin develop --tags
   #- export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
   #- echo "Deploying ${RELEASE_APK_FILE} to GitHub"
@@ -77,7 +77,7 @@ script:
 deploy:
   provider: releases
   api-key: 8275f8882f6249dd577cd511aad31cd931adefee #${GH_TOKEN}
-  #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTravis.${TRAVIS_TAG}.apk
+  #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/helloMachineTravis.${TRAVIS_TAG}.apk
   #file: app/build/outputs/apk/app-release.apk
   file: "/app/build/outputs/apk/app-release.apk"
   #file: "${RELEASE_APK_FILE}"
@@ -87,7 +87,7 @@ deploy:
     tags: true
     #tags: false
     all_branches: true
-    repo: musiczoa/HelloMachineTravis
+    repo: musiczoa/helloMachineTravis
 
 # assembleDebug, build -> Success. debug -> Fail
 
