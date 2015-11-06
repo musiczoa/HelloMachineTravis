@@ -23,6 +23,9 @@ addons:
   - swig
 
 before_install:
+  - echo pwd
+  - echo $TRAVIS_BUILD_DIR
+
   - chmod +x gradlew
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
