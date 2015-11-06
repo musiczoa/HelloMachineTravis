@@ -61,7 +61,6 @@ before_deploy:
   #- git tag
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
   #- git push origin develop --tags
-  #- ls -R
   - export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
   - echo "Deploying ${RELEASE_APK_FILE} to GitHub"
 
