@@ -59,8 +59,8 @@ before_deploy:
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   #- echo $GIT_TAG
   #- git tag
-  #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTest --tags
-  - git push origin develop --tags
+  - git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
+  #- git push origin develop --tags
   #- ls -R
   - export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
   - echo "Deploying ${RELEASE_APK_FILE} to GitHub"
@@ -77,7 +77,7 @@ deploy:
   on:
     tags: true
     #tags: false
-    branches: de
-    repo: musiczoa/HelloMachineTest
+    all_branches: true
+    repo: musiczoa/HelloMachineTravis
 
 # assembleDebug, build -> Success. debug -> Fail
