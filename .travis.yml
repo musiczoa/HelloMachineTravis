@@ -12,8 +12,8 @@ android:
   - android-23
   - extra-google-m2repository
   - extra-android-m2repository
-  - extra-android-support
-  - addon-google_apis-google-23
+  #- extra-android-support
+  #- addon-google_apis-google-23
 
 notifications:
   email: hwa.hyeon@insertcoin.me
@@ -23,7 +23,7 @@ addons:
   - swig
 
 before_install:
-  - echo pwd
+  - pwd
   - echo $TRAVIS_BUILD_DIR
 
   - chmod +x gradlew
