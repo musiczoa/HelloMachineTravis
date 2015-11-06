@@ -54,13 +54,13 @@ script:
   #- ./gradlew uploadArchives
 
 #before_deploy:
-  #- git config --global user.email "hwa.hyeon@insertcoin.me"
-  #- git config --global user.name "musiczoa"
+  - git config --global user.email "hwa.hyeon@insertcoin.me"
+  - git config --global user.name "musiczoa"
   #- git add . && git commit -m "tag commit test"
-  #- export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  #- echo ${GIT_TAG}
-  #- git tag ${GIT_TAG}
-  #- git push origin --tags
+  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  - echo ${GIT_TAG}
+  - git tag ${GIT_TAG} -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - git push origin --tags
   #- git push origin master
 
   #- git config --global user.email "hwa.hyeon@insertcoin.me"
