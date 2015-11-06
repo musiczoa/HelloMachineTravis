@@ -1,19 +1,14 @@
-# http://lint.travis-ci.org/ -> syntax check
-
-language : android
-sudo: false # true로 하면 ndk git clone에서 실패함
+language: android
+sudo: false
 jdk: oraclejdk7
-
 android:
- components:
-    - build-tools-23.0.1
-    # The SDK version used to compile the project
-    - android-23
-    - extra-google-m2repository
-    - extra-android-m2repository
-
-    - extra-android-support
-    - addon-google_apis-google-23
+  components:
+  - build-tools-23.0.1
+  - android-23
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - extra-android-support
+  - addon-google_apis-google-23
 
 notifications:
   email: hwa.hyeon@insertcoin.me
@@ -22,17 +17,8 @@ addons:
   apt_packages:
     - swig
 
-#branches:
-  #only:
-    #- master
-    #- /v\d+\.\d+[a-z]/
-
 before_install:
-  #- gem install travis -v 1.7.5 --no-rdoc --no-ri
-  #- travis setup releases
-  #- gem install travis
-
-  - chmod +x gradlew # 이거 안하면 ./gradlew build -> permission denied 에러
+  - chmod +x gradlew
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
   - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
@@ -41,56 +27,10 @@ before_install:
   - echo "ndk.debug=true" >> travisci.properties
   - cat travisci.properties
 
-script:
-  #- ./gradlew build assembleRelease
-  - ./gradlew clean assemble test uploadArchives
-  #- gradle dist
-  #- ./gradlew connectedCheck lint
-  #- ./gradlew connectedInstrumentTest
-  #- gradle clean build
-  #- echo $GH_TOKEN
-
-#after_success:
-  #- ./gradlew uploadArchives
-
-#before_deploy:
-  - git config --global user.email "hwa.hyeon@insertcoin.me"
-  - git config --global user.name "musiczoa"
-  #- git add . && git commit -m "tag commit test"
-  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  - echo ${GIT_TAG}
-  - git tag ${GIT_TAG} -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  - git push origin --tags
-  #- git push origin master
-
-  #- git config --global user.email "hwa.hyeon@insertcoin.me"
-  #- git config --global user.name "musiczoa"
-  #- export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  #- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-  #- echo $GIT_TAG
-  #- git tag
-  #- git push -q https://musiczoa@github.com/musiczoa/helloMachineTravis --tags
-  #- git push origin develop --tags
-  #- export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
-  #- echo "Deploying ${RELEASE_APK_FILE} to GitHub"
-
 deploy:
   provider: releases
-  api-key: 8275f8882f6249dd577cd511aad31cd931adefee #${GH_TOKEN}
-  #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/helloMachineTravis.${TRAVIS_TAG}.apk
-  #file: app/build/outputs/apk/app-release.apk
+  api_key:
+    secure: BKCe/X7nlIZRbis/QX8NK2lNovQ3B12ihSOk50UKOJiRb2vZEyaVVDWUuxIAFMLC4si8NHpHmFeCosAgmQ+q+E1jAkAl74UwC5z+KhotgcDpFzrIZMGq2q1rk5M3rWvNPDnKt0CcOxohZJk0VbfAdPucITV07KlsYxl7SlFcXrfTaUu82hEEDQ27dHn6qc8Yt9riXokKEkndLdvDXLYc2ul4vRy2mBkjJVyKv2QD3lUnHJTr3pTMR91QxO5vBOF6rDec1uEK9ZlrMfheiiUILnQRY5Hwlx7SdV9KkuabAkba9HDVKNXb4kG/BT3y2Is2nRjh8rq8Eo6Ye2DPvawgdw8Yn7DP3bGB2M1QeJPYyEsjlku7rZDHiOwXkaU4RZkdgBLSaw22pr7sUygmgib8uOMhvl/ymJAopfzQrcXni/j1FUY/vVt2K84fSo7zsB2zthoos1ruhBHizlRBmJXn3N8Xtcauylw5OcU0MIQFzkF2mXZ5DlSAtglU+ggiQPTRbizWI9FvG+Y61obf6yZ+0TW+DaX7Uml0M8ctc6KIIDG3f2sc+IF27K5VkuNcXwqNtcIjuemvSe94wODFNqbrwyH1btzXXHcXuK5dIt9TTKEm/hHfJiVBLtkzKIgVOdv8gwluYKB2MdrbYY0L5Udkkv0JYv42m5r/Vpsv5NWCZ74=
   file: "/app/build/outputs/apk/app-release.apk"
-  #file: "${RELEASE_APK_FILE}"
-  #- ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk
-  skip_cleanup: true
   on:
-    tags: true
-    #tags: false
-    all_branches: true
     repo: musiczoa/helloMachineTravis
-
-# assembleDebug, build -> Success. debug -> Fail
-
-# https://github.com/travis-ci/travis-ci/issues/4093
-
-# Skipping a deployment with the releases provider because this is not a tagged commit
