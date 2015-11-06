@@ -5,6 +5,7 @@ jdk: oraclejdk7
 global:
   env:
     secure: up0ng0BtE2xgUiyLIuBRdMs4lXo1A1QwJuAz9uLBYBDfiYle0TCS/DfKVsFhM3Ts8Dvw6s/CR98/vm6klskX8D3UpraaNOxWYF1WmAg12SGSA7pKBrKHXvWABs8xnu0Nu2jY11+qv9BKgA79Nd05/ZReHmW7UG5yrPx+M+0rIYRK8tUdJjDfahNJQgHxrWLho82adVaAr/IpU+tucOSbeeioRhcohO/gTRyTdqQtqux0j1IJEenX0onnN5gFCn7Px+bkOgniQol3TymhA3XQXd/t/9qrFGi4uxi/t4iid6Zq4RAnuzi4IRw1mG03ePGqZNyNkGgTkv+uDwsrs+oUfFl/Pm03yLync0ZcaQCfClg3Xi5QdZwbTA3e3tegsJW37KbaYjvZk+Wkg93VjPoh0zNsfqHxAq2kWXX/khv/erd13PHp2rOG73ZORudgGZfwRrhdC2sexyNCvOwIMD6a/o/5vx8rFO/TnQwSz4lqk8wVIiC6iy/jbKBXtftBVCZHRXZ/935YoDqdDgrYq1iIPZSXs1Gj9JGKqg9/InAGIZqB+FXnJZYzzJjYIJpYpCzVSyn7o8ZttTDvCZjYpa1g9n2lcTML/kiHXbsuZOXW/Waw+zutW1L22tyaz7pdAyHxdGv7jt6XMEik+aZ2AZuIE7mwB9N1XizXdSbOc7DW1qc=
+
 android:
   components:
   - build-tools-23.0.1
@@ -13,11 +14,14 @@ android:
   - extra-android-m2repository
   - extra-android-support
   - addon-google_apis-google-23
+
 notifications:
   email: hwa.hyeon@insertcoin.me
+
 addons:
   apt_packages:
   - swig
+
 before_install:
 - chmod +x gradlew
 - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
@@ -27,16 +31,19 @@ before_install:
 - echo "swig.path=`which swig`" >> travisci.properties
 - echo "ndk.debug=true" >> travisci.properties
 - cat travisci.properties
-before_script:
 
+before_script:
 - git config --global user.email "hwa.hyeon@insertcoin.me"
 - git config --global user.name "musiczoa"
 - git config --global user.password ${GIT_PASSWORD}
-- git commit -m "tagged commit test"
+
+- git add . && commit -m "tagged commit test"
 - git tag 1.0.5
 - git push origin --tags
+
 script:
   - ./gradlew clean build
+
 deploy:
   provider: releases
   api_key:
