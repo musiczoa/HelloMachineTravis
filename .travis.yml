@@ -53,13 +53,13 @@ script:
   #- ./gradlew uploadArchives
 
 before_deploy:
-  - git config --global user.email "hwa.hyeon@insertcoin.me"
+  #- git config --global user.email "hwa.hyeon@insertcoin.me"
   #- git config --global user.name "musiczoa"
-  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  #- export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
+  #- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   #- echo $GIT_TAG
   #- git tag
-  - git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
+  #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
   #- git push origin develop --tags
   #- ls -R
   - export RELEASE_APK_FILE=$(ls build/outputs/apk/*.apk)
@@ -67,8 +67,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  api-key: 4e2bddb32504646b0e233adfc80f8e03fc61aff8 #${GH_TOKEN} # GITHUB OAUTH TOKEN
-  #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTest.${TRAVIS_TAG}.apk
+  api-key: 8275f8882f6249dd577cd511aad31cd931adefee #${GH_TOKEN}
+  #file: ${HOME}/build/${TRAVIS_REPO_SLUG}/app/build/outputs/apk/HelloMachineTravis.${TRAVIS_TAG}.apk
   #file: app/build/outputs/apk/app-release.apk
   #file: "/app/build/outputs/apk/app-release.apk"
   file: "${RELEASE_APK_FILE}"
@@ -81,3 +81,5 @@ deploy:
     repo: musiczoa/HelloMachineTravis
 
 # assembleDebug, build -> Success. debug -> Fail
+
+# https://github.com/travis-ci/travis-ci/issues/4093
