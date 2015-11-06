@@ -92,3 +92,5 @@ deploy:
 # assembleDebug, build -> Success. debug -> Fail
 
 # https://github.com/travis-ci/travis-ci/issues/4093
+
+# Skipping a deployment with the releases provider because this is not a tagged commit
