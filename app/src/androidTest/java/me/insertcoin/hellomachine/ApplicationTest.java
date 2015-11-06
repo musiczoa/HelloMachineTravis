@@ -1,4 +1,4 @@
-package insertcoin.me.hellomachine;
+package me.insertcoin.hellomachine;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
