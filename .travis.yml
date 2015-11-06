@@ -35,7 +35,6 @@ before_install:
 script:
   - ./gradlew clean build
 
-before_deploy:
   - git config --global user.email "hwa.hyeon@insertcoin.me"
   - git config --global user.name "musiczoa"
   - git config --global user.password ${GIT_PASSWORD}
