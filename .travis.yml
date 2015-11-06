@@ -58,7 +58,8 @@ deploy:
   api_key:
     secure: BKCe/X7nlIZRbis/QX8NK2lNovQ3B12ihSOk50UKOJiRb2vZEyaVVDWUuxIAFMLC4si8NHpHmFeCosAgmQ+q+E1jAkAl74UwC5z+KhotgcDpFzrIZMGq2q1rk5M3rWvNPDnKt0CcOxohZJk0VbfAdPucITV07KlsYxl7SlFcXrfTaUu82hEEDQ27dHn6qc8Yt9riXokKEkndLdvDXLYc2ul4vRy2mBkjJVyKv2QD3lUnHJTr3pTMR91QxO5vBOF6rDec1uEK9ZlrMfheiiUILnQRY5Hwlx7SdV9KkuabAkba9HDVKNXb4kG/BT3y2Is2nRjh8rq8Eo6Ye2DPvawgdw8Yn7DP3bGB2M1QeJPYyEsjlku7rZDHiOwXkaU4RZkdgBLSaw22pr7sUygmgib8uOMhvl/ymJAopfzQrcXni/j1FUY/vVt2K84fSo7zsB2zthoos1ruhBHizlRBmJXn3N8Xtcauylw5OcU0MIQFzkF2mXZ5DlSAtglU+ggiQPTRbizWI9FvG+Y61obf6yZ+0TW+DaX7Uml0M8ctc6KIIDG3f2sc+IF27K5VkuNcXwqNtcIjuemvSe94wODFNqbrwyH1btzXXHcXuK5dIt9TTKEm/hHfJiVBLtkzKIgVOdv8gwluYKB2MdrbYY0L5Udkkv0JYv42m5r/Vpsv5NWCZ74=
   skip_cleanup: true
-  file: "/app/build/outputs/apk/app-release.apk"
+  #file: "/app/build/outputs/apk/app-release.apk"
+  file: "/app/app-release.apk"
   on:
     tags: True
     #all_branches: true
