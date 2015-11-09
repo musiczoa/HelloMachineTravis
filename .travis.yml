@@ -23,7 +23,7 @@ addons:
 
 before_install:
   - chmod +x gradlew
-  #- chmod +x after_success.sh
+  - chmod +x after_success.sh
   - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
   - export ANDROID_NDK_HOME=$HOME/android-ndk-root
   - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
