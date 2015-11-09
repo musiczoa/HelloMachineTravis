@@ -57,7 +57,7 @@ deploy:
   file_glob: true
   # Which file(s) to upload
   #file: "${RELEASE_PKG_FILE}"
-  file: app/build/outputs/apk/app-release.apk
+  file: app/build/outputs/apk/app-debug.apk
   #file: "app-release.apk"
   # do not delete the files we're trying to upload
   skip_cleanup: true
