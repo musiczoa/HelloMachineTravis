@@ -47,7 +47,7 @@ before_deploy:
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
   #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" --tags
+  - git push "https://${GH_TOKEN}@${GH_REF}" --tags
 
 #after_success:
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
@@ -69,8 +69,8 @@ deploy:
   skip_cleanup: true
   on:
     repo: musiczoa/helloMachineTravis
-    tags: false
-    all_branches: true
+    tags: true
+    #all_branches: true
 
 #env:
   #global:
