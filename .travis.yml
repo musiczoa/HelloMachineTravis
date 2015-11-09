@@ -4,8 +4,8 @@ jdk: oraclejdk7
 
 env:
   global:
-    GH_REF: github.com/musiczoa/HelloMachineTravis.git
-    secure: ag9ZY3NnzctygjaMvTRfNTe4BUiz8VsJCiTYb0sCj7dL9G7hzC3zUady2W7ZcutOh2bMVPNQOLCcM2fE7F6HUkaVy6ykQOnPcxbREI1TSc8Bmg6uN2XVHxFDxFVM/PAAvndwCxgnVBlosdAnkM9VPXoO/12KbjDzXLasQgTnCjCaAZURHoPuePSKoDXokpu1OLD9z595Vvrp01iqLAt4rgx1+D/IgOEfBPRMqKg3/Ck/64kQBquBttuXDi0KzxdMMRlAs7+lQ4IsCTbftJ0l72YoXrIzNOP1LOOXN6ho26+Qn5HwyXAIHjwbJS1NF2Kr+EL6iWBaDVnHFbrVfph6RSjy7/HUCgHUPORLPg9GhaTrquQsVtZQWx76O0Hdr7PNWAXDeD0EswvGHx4p3ZNdO0sOrcWW31Si7GLsHNPQVw8hvFuJRaxw4IPvLlwfqnOcymVlek6Hi51hEDUCyYwHxmiENnJGVbdpslNmKkdJTXPIDBsflQWw+LWOPJCFo3WsKcRYUSJRo5v1Q58MHOzDANF6P2fvEi9lcs6tJqUXzlikGICzpwEsM3+MgGoPqaeRBcZYHXbcySoQGyGG2wQ3blXP1gqbH3lo1pRUyqZ0a65Ch5UhGMj8/2JTi7v3YQrXDrjeBfccVBB9XeSX89hGVKadakuRpjVZm7V4dt2MVpE=
+    - GH_REF: github.com/musiczoa/HelloMachineTravis.git
+    - secure: ag9ZY3NnzctygjaMvTRfNTe4BUiz8VsJCiTYb0sCj7dL9G7hzC3zUady2W7ZcutOh2bMVPNQOLCcM2fE7F6HUkaVy6ykQOnPcxbREI1TSc8Bmg6uN2XVHxFDxFVM/PAAvndwCxgnVBlosdAnkM9VPXoO/12KbjDzXLasQgTnCjCaAZURHoPuePSKoDXokpu1OLD9z595Vvrp01iqLAt4rgx1+D/IgOEfBPRMqKg3/Ck/64kQBquBttuXDi0KzxdMMRlAs7+lQ4IsCTbftJ0l72YoXrIzNOP1LOOXN6ho26+Qn5HwyXAIHjwbJS1NF2Kr+EL6iWBaDVnHFbrVfph6RSjy7/HUCgHUPORLPg9GhaTrquQsVtZQWx76O0Hdr7PNWAXDeD0EswvGHx4p3ZNdO0sOrcWW31Si7GLsHNPQVw8hvFuJRaxw4IPvLlwfqnOcymVlek6Hi51hEDUCyYwHxmiENnJGVbdpslNmKkdJTXPIDBsflQWw+LWOPJCFo3WsKcRYUSJRo5v1Q58MHOzDANF6P2fvEi9lcs6tJqUXzlikGICzpwEsM3+MgGoPqaeRBcZYHXbcySoQGyGG2wQ3blXP1gqbH3lo1pRUyqZ0a65Ch5UhGMj8/2JTi7v3YQrXDrjeBfccVBB9XeSX89hGVKadakuRpjVZm7V4dt2MVpE=
 
 android:
   components:
@@ -35,6 +35,10 @@ script:
   - "./gradlew build check"
 
 before_deploy:
+  - echo $GH_REF
+  - echo $GH_TOKEN
+  - echo $TRAVIS_BRANCH
+  - echo $TRAVIS_BUILD_NUMBER
   #- export RELEASE_PKG_FILE=$(app/build/outputs/apk/*.apk)
   - git config --global user.email "hwa.hyeon@insertcoin.me"
   #- git config --global user.email "musiczoa@naver.com"
@@ -45,27 +49,28 @@ before_deploy:
   #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" --tags
 
-after_success:
+#after_success:
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
   #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
   #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" --tags
-  - echo $GH_REF
-  - echo $GH_TOKEN
-  - echo $TRAVIS_BRANCH
-  - echo $TRAVIS_BUILD_NUMBER
+  #- echo $GH_REF
+  #- echo $GH_TOKEN
+  #- echo $TRAVIS_BRANCH
+  #- echo $TRAVIS_BUILD_NUMBER
 
 deploy:
   provider: releases
   api_key:
     #secure: BKCe/X7nlIZRbis/QX8NK2lNovQ3B12ihSOk50UKOJiRb2vZEyaVVDWUuxIAFMLC4si8NHpHmFeCosAgmQ+q+E1jAkAl74UwC5z+KhotgcDpFzrIZMGq2q1rk5M3rWvNPDnKt0CcOxohZJk0VbfAdPucITV07KlsYxl7SlFcXrfTaUu82hEEDQ27dHn6qc8Yt9riXokKEkndLdvDXLYc2ul4vRy2mBkjJVyKv2QD3lUnHJTr3pTMR91QxO5vBOF6rDec1uEK9ZlrMfheiiUILnQRY5Hwlx7SdV9KkuabAkba9HDVKNXb4kG/BT3y2Is2nRjh8rq8Eo6Ye2DPvawgdw8Yn7DP3bGB2M1QeJPYyEsjlku7rZDHiOwXkaU4RZkdgBLSaw22pr7sUygmgib8uOMhvl/ymJAopfzQrcXni/j1FUY/vVt2K84fSo7zsB2zthoos1ruhBHizlRBmJXn3N8Xtcauylw5OcU0MIQFzkF2mXZ5DlSAtglU+ggiQPTRbizWI9FvG+Y61obf6yZ+0TW+DaX7Uml0M8ctc6KIIDG3f2sc+IF27K5VkuNcXwqNtcIjuemvSe94wODFNqbrwyH1btzXXHcXuK5dIt9TTKEm/hHfJiVBLtkzKIgVOdv8gwluYKB2MdrbYY0L5Udkkv0JYv42m5r/Vpsv5NWCZ74=
-    secure: ${GH_TOKEN}
+    secure: ag9ZY3NnzctygjaMvTRfNTe4BUiz8VsJCiTYb0sCj7dL9G7hzC3zUady2W7ZcutOh2bMVPNQOLCcM2fE7F6HUkaVy6ykQOnPcxbREI1TSc8Bmg6uN2XVHxFDxFVM/PAAvndwCxgnVBlosdAnkM9VPXoO/12KbjDzXLasQgTnCjCaAZURHoPuePSKoDXokpu1OLD9z595Vvrp01iqLAt4rgx1+D/IgOEfBPRMqKg3/Ck/64kQBquBttuXDi0KzxdMMRlAs7+lQ4IsCTbftJ0l72YoXrIzNOP1LOOXN6ho26+Qn5HwyXAIHjwbJS1NF2Kr+EL6iWBaDVnHFbrVfph6RSjy7/HUCgHUPORLPg9GhaTrquQsVtZQWx76O0Hdr7PNWAXDeD0EswvGHx4p3ZNdO0sOrcWW31Si7GLsHNPQVw8hvFuJRaxw4IPvLlwfqnOcymVlek6Hi51hEDUCyYwHxmiENnJGVbdpslNmKkdJTXPIDBsflQWw+LWOPJCFo3WsKcRYUSJRo5v1Q58MHOzDANF6P2fvEi9lcs6tJqUXzlikGICzpwEsM3+MgGoPqaeRBcZYHXbcySoQGyGG2wQ3blXP1gqbH3lo1pRUyqZ0a65Ch5UhGMj8/2JTi7v3YQrXDrjeBfccVBB9XeSX89hGVKadakuRpjVZm7V4dt2MVpE=
   file_glob: true
   file: app/build/outputs/apk/app-release.apk
   #file: "${RELEASE_PKG_FILE}"
   skip_cleanup: true
   on:
     repo: musiczoa/helloMachineTravis
-    tags: true
+    tags: false
+    all_branches: true
 
 #env:
   #global:
