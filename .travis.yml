@@ -34,7 +34,7 @@ before_install:
 script:
   - "./gradlew build check"
 
-after_script:
+after_success:
   if [ ! -z "$TRAVIS_TAG" ]
   then
     echo "This commit is tagged commit. then we will deploy."
