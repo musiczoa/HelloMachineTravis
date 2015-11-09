@@ -46,7 +46,7 @@ script:
   #- git push -u origin --tags
 
 before_deploy:
-  - export RELEASE_PKG_FILE=$(ls *.apk)
+  - export RELEASE_PKG_FILE=$(app/build/outputs/apk/*.apk)
   - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
   #- dpl --provider=releases
 
