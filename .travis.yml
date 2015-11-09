@@ -22,14 +22,14 @@ addons:
   - swig
 
 before_install:
-- chmod +x gradlew
-- git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
-- export ANDROID_NDK_HOME=$HOME/android-ndk-root
-- echo "sdk.dir=$ANDROID_HOME" > travisci.properties
-- echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
-- echo "swig.path=`which swig`" >> travisci.properties
-- echo "ndk.debug=true" >> travisci.properties
-- cat travisci.properties
+  - chmod +x gradlew
+  - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
+  - export ANDROID_NDK_HOME=$HOME/android-ndk-root
+  - echo "sdk.dir=$ANDROID_HOME" > travisci.properties
+  - echo "ndk.dir=$ANDROID_NDK_HOME" >> travisci.properties
+  - echo "swig.path=`which swig`" >> travisci.properties
+  - echo "ndk.debug=true" >> travisci.properties
+  - cat travisci.properties
 
 script:
   - "./gradlew build check"
@@ -42,7 +42,15 @@ before_deploy:
   - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
   #- git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+  #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+
+after_success:
+  - git push -q https://musiczoa@github.com/musiczoa/HelloMachineTravis --tags
+  #- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+  - ${GH_REF}
+  - ${GH_TOKEN}
+  - $TRAVIS_BRANCH
+  - $TRAVIS_BUILD_NUMBER
 
 deploy:
   provider: releases
