@@ -63,7 +63,7 @@ deploy:
   skip_cleanup: true
   on:
     #all_branches: true
-    repo: musiczoa/HelloMachineTravis
+    repo: musiczoa/helloMachineTravis
     tags: true
 
 # https://github.com/larsgrefer/bpm-meter-android/blob/master/.travis.yml
