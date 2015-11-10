@@ -36,6 +36,7 @@ script:
 
 after_success:
   - bash --verbose ./after_success.sh
+  - ls -al app/build/outputs/apk/
 
 deploy:
   - provider: releases
