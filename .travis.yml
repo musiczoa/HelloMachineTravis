@@ -18,7 +18,8 @@ notifications:
   email: hwa.hyeon@insertcoin.me
 
 addons:
-  apt_packages: swig
+  apt_packages:
+    - swig
 
 before_install:
   - chmod +x gradlew
