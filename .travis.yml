@@ -9,17 +9,17 @@ env:
 
 android:
   components:
-  - build-tools-23.0.1
-  - android-23
-  - extra-google-m2repository
-  - extra-android-m2repository
+    build-tools-23.0.1
+    android-23
+    extra-google-m2repository
+    extra-android-m2repository
 
 notifications:
   email: hwa.hyeon@insertcoin.me
 
 addons:
   apt_packages:
-  - swig
+    - swig
 
 before_install:
   - chmod +x gradlew
@@ -35,7 +35,8 @@ script:
   - "./gradlew build check"
 
 after_success:
-  - bash --verbose ./after_success.sh
+  - bash ./after_success.sh
+  - ls -al app/build/outputs/apk/
 
 deploy:
   - provider: releases
