@@ -19,7 +19,7 @@ notifications:
 
 addons:
   apt_packages:
-    - swig
+  - swig
 
 before_install:
   - chmod +x gradlew
@@ -32,7 +32,7 @@ before_install:
   - cat travisci.properties
 
 script:
-  - ./gradlew build check
+  - "./gradlew build check"
 
 after_success:
   - bash ./after_success.sh
