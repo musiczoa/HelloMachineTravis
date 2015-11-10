@@ -1,5 +1,5 @@
 language: android
-# sudo: true
+#sudo: true
 jdk: oraclejdk7
 
 env:
@@ -9,10 +9,10 @@ env:
 
 android:
   components:
-    - build-tools-23.0.1
-    - android-23
-    - extra-google-m2repository
-    - extra-android-m2repository
+  - build-tools-23.0.1
+  - android-23
+  - extra-google-m2repository
+  - extra-android-m2repository
 
 notifications:
   email: hwa.hyeon@insertcoin.me
@@ -35,14 +35,17 @@ script:
   - "./gradlew build check"
 
 after_success:
-  - bash ./after_success.sh
+  - bash --verbose ./after_success.sh
 
 deploy:
-  provider: releases
-  api_key:
-    secure: A1yO1M2xX/TvJ/IebIqHjhriflHiGZtX75PDGsTeSTJGKqCxeMXrQhduIIOSHtVqD8JwGgmbLpjI0mP2TfzWtJoPyCbXlUnkAA6XOnNgnR/UfNrpoScRKZYrg2zvwUkhQTr5kLQQ/6htchFTy7QoQRqkGIqOOXqgC1gFAG1ymdLad6r8S5H0wB8fbODAIgMYMGqP7WqSflGmSQKCJWqjlesGyrGLmEqhfBgdlZI/x0v7zhDFy0+UFRMiR8C6lbckRzML9DEa+eAQQevfU7W//4ily2nClVF0I9sMaC8ooq+HSnRRNDZT1zvqKzoxCyphkiNjEHAVLF9eng6AFoIDWBO43FzqFC9Il+wofddyoxsP4kgmixKKEuhN+a3i6giuK9f47nC4AgPYSjpd9/by6st2nd1EfqU4k8/elQzok8YDWSaAUVjHaeMhG4GLdCDaKXj2J/BFPM1Np09LND+NX4kT5CYnJMR3mTwT9RSaB/2eo5OT9dz7fA/Wsj7ta7wiLJpIfpJegcFJoLfC2yTKRZIrMQU6YVlF6OamdhrNb1GwS+UR4VuD9e2Ygv4dm56QG/wVVd0IykaTv7Uq262EpdVPeuR3WwbifzdeqgMjhbMjE6+bjZ0KylImDzXOHApdesI4aGHnuUT1w630dEPeu6w+nQ5lDSHzfQAd8xisTbA=
-  file: app/build/outputs/apk/app-unsigned-debug.apk
-  skip_cleanup: true
-  on:
-    repo: musiczoa/HelloMachineTravis
-    tags: true
+  - provider: releases
+    api_key:
+      secure: A1yO1M2xX/TvJ/IebIqHjhriflHiGZtX75PDGsTeSTJGKqCxeMXrQhduIIOSHtVqD8JwGgmbLpjI0mP2TfzWtJoPyCbXlUnkAA6XOnNgnR/UfNrpoScRKZYrg2zvwUkhQTr5kLQQ/6htchFTy7QoQRqkGIqOOXqgC1gFAG1ymdLad6r8S5H0wB8fbODAIgMYMGqP7WqSflGmSQKCJWqjlesGyrGLmEqhfBgdlZI/x0v7zhDFy0+UFRMiR8C6lbckRzML9DEa+eAQQevfU7W//4ily2nClVF0I9sMaC8ooq+HSnRRNDZT1zvqKzoxCyphkiNjEHAVLF9eng6AFoIDWBO43FzqFC9Il+wofddyoxsP4kgmixKKEuhN+a3i6giuK9f47nC4AgPYSjpd9/by6st2nd1EfqU4k8/elQzok8YDWSaAUVjHaeMhG4GLdCDaKXj2J/BFPM1Np09LND+NX4kT5CYnJMR3mTwT9RSaB/2eo5OT9dz7fA/Wsj7ta7wiLJpIfpJegcFJoLfC2yTKRZIrMQU6YVlF6OamdhrNb1GwS+UR4VuD9e2Ygv4dm56QG/wVVd0IykaTv7Uq262EpdVPeuR3WwbifzdeqgMjhbMjE6+bjZ0KylImDzXOHApdesI4aGHnuUT1w630dEPeu6w+nQ5lDSHzfQAd8xisTbA=
+
+    file_glob: true
+    file: app/build/outputs/apk/app-release.apk
+    #file: "${RELEASE_PKG_FILE}"
+    skip_cleanup: true
+    on:
+      repo: musiczoa/helloMachineTravis
+      tags: true
