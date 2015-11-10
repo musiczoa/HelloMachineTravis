@@ -45,5 +45,5 @@ deploy:
   #file: "${RELEASE_PKG_FILE}"
   skip_cleanup: true
   on:
-    repo: musiczoa/HelloMachineTravis
+    repo: musiczoa/helloMachineTravis
     tags: true
