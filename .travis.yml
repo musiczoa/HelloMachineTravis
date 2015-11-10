@@ -9,17 +9,16 @@ env:
 
 android:
   components:
-  - build-tools-23.0.1
-  - android-23
-  - extra-google-m2repository
-  - extra-android-m2repository
+    - build-tools-23.0.1
+    - android-23
+    - extra-google-m2repository
+    - extra-android-m2repository
 
 notifications:
   email: hwa.hyeon@insertcoin.me
 
 addons:
-  apt_packages:
-  - swig
+  apt_packages: swig
 
 before_install:
   - chmod +x gradlew
@@ -32,19 +31,19 @@ before_install:
   - cat travisci.properties
 
 script:
-  - "./gradlew build check"
+  - ./gradlew build check
 
 after_success:
   - bash ./after_success.sh
 
 deploy:
-  - provider: releases
-    api_key:
-      secure: QJJk38caP6XLRffzK2vwzR5Xk0uczOvVXkwNcRQ0lkxlcDWwMb0FwGkOrqkoGP6Sw5kuCPVeJbiJ0qrH8wop81jJwruNqYc8HKFW9KteNp7/Ly5OhyK2XsJ43njyd8zpWWlp7KvNlSWebSFcVkVenuwmi0PXsh98GEjh08DTIteG6ymjalRYP+m896fjzRhSta+081eN3fx5lIRRh6i3hGY5nriU8HCG0scQYDzWlni+rZUHmQc0NFFMvCoityYCvD8kRAdugs6HF1vC+Ngpg4GPjnFPG6rBCBKgm/U8HST7L6+sVd7A1V5WV1yG5JM4OabVXOlcly0wpNino7NKsPUEO5sbULyeq/RWYda5G1+HUMQkBaSxaB27+YyDNiL2Nr/Hi/nBe/tjcsHcWEiMbS34xN5REX44zI4cqUkHRHG+cUPo+++virOX0LGLh17PIbo5bM2AW0s02NIY5ODBddBIetTqbpSr9xn6Y8bYnRXAV9hmaaHLh9VT5Hv1zGhbZaUwimnbALD+f7wUuxsvbUtVbysCdBMKXYaUQJgSDHPj469oq432G+WQDA1tUhzs8hhDGBoF3n8AgwCsAKHxofUBi1mDfMELHxYxP1GLJyV+GWsZDBDCTnw9Wz48RjFzr4Lbq0mLNMqSWyOtlcBKHUMpULBh9gUxIs5AdemEnl4=
-    #file_glob: true
-    file: app/build/outputs/apk/app-release.apk
-    #file: "${RELEASE_PKG_FILE}"
-    skip_cleanup: true
-    on:
-      repo: musiczoa/helloMachineTravis
-      tags: true
+  provider: releases
+  api_key:
+    secure: QJJk38caP6XLRffzK2vwzR5Xk0uczOvVXkwNcRQ0lkxlcDWwMb0FwGkOrqkoGP6Sw5kuCPVeJbiJ0qrH8wop81jJwruNqYc8HKFW9KteNp7/Ly5OhyK2XsJ43njyd8zpWWlp7KvNlSWebSFcVkVenuwmi0PXsh98GEjh08DTIteG6ymjalRYP+m896fjzRhSta+081eN3fx5lIRRh6i3hGY5nriU8HCG0scQYDzWlni+rZUHmQc0NFFMvCoityYCvD8kRAdugs6HF1vC+Ngpg4GPjnFPG6rBCBKgm/U8HST7L6+sVd7A1V5WV1yG5JM4OabVXOlcly0wpNino7NKsPUEO5sbULyeq/RWYda5G1+HUMQkBaSxaB27+YyDNiL2Nr/Hi/nBe/tjcsHcWEiMbS34xN5REX44zI4cqUkHRHG+cUPo+++virOX0LGLh17PIbo5bM2AW0s02NIY5ODBddBIetTqbpSr9xn6Y8bYnRXAV9hmaaHLh9VT5Hv1zGhbZaUwimnbALD+f7wUuxsvbUtVbysCdBMKXYaUQJgSDHPj469oq432G+WQDA1tUhzs8hhDGBoF3n8AgwCsAKHxofUBi1mDfMELHxYxP1GLJyV+GWsZDBDCTnw9Wz48RjFzr4Lbq0mLNMqSWyOtlcBKHUMpULBh9gUxIs5AdemEnl4=
+  #file_glob: true
+  file: app/build/outputs/apk/app-release.apk
+  #file: "${RELEASE_PKG_FILE}"
+  skip_cleanup: true
+  on:
+    repo: musiczoa/helloMachineTravis
+    tags: true
